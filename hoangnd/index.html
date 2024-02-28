@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tour Web</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<header>
+    <img alt="logo" src="images/logo.png">
+</header>
+<main>
+    <div class="main-content">
+        <div class="grid grid-cols-5 gap-0">
+            <div class="main-col">
+                <div class="group relative ">
+                    <img src="images/tour1.jpg" alt="Tour 1"
+                         class="w-full h-40 object-cover rounded-md transition-transform transform group-hover:scale-105"
+                         onclick="openLightbox('tour1.jpg')">
+                </div>
+                <h2>Tour 1</h2>
+                <p>Lorem ipsum dolor sit amet consectetur adipiscing elit elementum lobortis sodales placerat, primis ultrices aliquam libero cum posuere nulla nisi lacinia. </p>
+            </div>
+            <div class="main-col">
+                <div class="group relative ">
+                    <img src="images/tour2.jpg" alt="Tour 2"
+                         class="w-full h-40 object-cover rounded-md transition-transform transform group-hover:scale-105"
+                         onclick="openLightbox('images/tour2.jpg')">
+                </div>
+                <h2>Tour 2</h2>
+                <p>Lorem ipsum dolor sit amet consectetur adipiscing elit elementum lobortis sodales placerat, primis ultrices aliquam libero cum posuere nulla nisi lacinia. </p>
+            </div>
+            <div class="main-col">
+                <div class="group relative ">
+                    <img src="images/tour3.jpg" alt="Tour 3"
+                         class="w-full h-40 object-cover rounded-md transition-transform transform group-hover:scale-105"
+                         onclick="openLightbox('images/tour3.jpg')">
+                </div>
+                <h2>Tour 3</h2>
+                <p>Lorem ipsum dolor sit amet consectetur adipiscing elit elementum lobortis sodales placerat, primis ultrices aliquam libero cum posuere nulla nisi lacinia. </p>
+            </div>
+            <div class="main-col">
+                <div class="group relative ">
+                    <img src="images/tour4.jpg" alt="Tour 4"
+                         class="w-full h-40 object-cover rounded-md transition-transform transform group-hover:scale-105"
+                         onclick="openLightbox('images/tour4.jpg')">
+                </div>
+                <h2>Tour 4</h2>
+                <p>Lorem ipsum dolor sit amet consectetur adipiscing elit elementum lobortis sodales placerat, primis ultrices aliquam libero cum posuere nulla nisi lacinia. </p>
+            </div>
+            <div class="main-col">
+                <div class="group relative ">
+                    <img src="images/tour5.jpg" alt="Tour 5"
+                         class="w-full h-40 object-cover rounded-md transition-transform transform group-hover:scale-105"
+                         onclick="openLightbox('images/tour5.jpg')">
+                </div>
+                <h2>Tour 5</h2>
+                <p>Lorem ipsum dolor sit amet consectetur adipiscing elit elementum lobortis sodales placerat, primis ultrices aliquam libero cum posuere nulla nisi lacinia. </p>
+            </div>
+        </div>
+        <div>
+            <form>
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" required>
+
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+
+                <label for="main-col">Tour</label>
+                <select id="main-col" name="main-col" required>
+                    <option value="main-col1">Tour 1</option>
+                    <option value="main-col2">Tour 2</option>
+                    <option value="main-col2">Tour 3</option>
+                    <option value="main-col2">Tour 4</option>
+                </select>
+
+                <label for="departureDate">Date</label>
+                <input type="date" id="departureDate" name="departureDate" required>
+
+                <button type="submit">Book Now</button>
+            </form>
+        </div>
+        <div>
+            <form id="commentForm">
+                <label for="username">Username:</label>
+                <input type="text" id="username" required>
+
+                <label for="comment">Comment:</label>
+                <textarea id="comment" class="dark:border-gray-600" required></textarea>
+
+                <button type="button" onclick="addComment()">Add Comment</button>
+            </form>
+
+            <ul id="comments"></ul>
+
+            <script>
+                // Load comments from Local Storage
+                const storedComments = JSON.parse(localStorage.getItem('comments')) || [];
+                displayComments(storedComments);
+
+                function addComment() {
+                    const username = document.getElementById('username').value;
+                    const commentText = document.getElementById('comment').value;
+
+                    if (username && commentText) {
+                        const comment = {
+                            username: username,
+                            text: commentText,
+                            timestamp: new Date().toISOString()
+                        };
+
+                        // Add the new comment to the array
+                        storedComments.push(comment);
+
+                        // Save the updated comments array to Local Storage
+                        localStorage.setItem('comments', JSON.stringify(storedComments));
+
+                        // Clear the form fields
+                        document.getElementById('username').value = '';
+                        document.getElementById('comment').value = '';
+
+                        // Display the updated comments
+                        displayComments(storedComments);
+                    }
+                }
+
+                function displayComments(comments) {
+                    const commentsList = document.getElementById('comments');
+                    commentsList.innerHTML = '';
+
+                    comments.forEach(comment => {
+                        const li = document.createElement('li');
+                    li.classList.add('comment');
+                    li.innerHTML = `
+                      <strong>${comment.username}</strong>
+                      <p>${comment.text}</p>
+                      <small>${new Date(comment.timestamp).toLocaleString()}</small>
+                    `;
+                    commentsList.appendChild(li);
+                });
+                }
+            </script>
+        </div>
+    </div>
+</main>
+<div id="lightbox" class="lightbox">
+    <span class="text-white absolute top-4 right-4  text-xl" onclick="closeLightbox()">&times;</span>
+    <img id="lightboxImage" src="" alt="Large Image" class="max-w-full max-h-full">
+</div>
+<footer>
+    <p>Copyright AHT @2024</p>
+</footer>
+<script>
+    // show lightbox img
+    function openLightbox(imageUrl) {
+        document.getElementById('lightboxImage').src = imageUrl;
+        document.getElementById('lightbox').classList.remove('close');
+        document.getElementById('lightbox').style.display = 'flex';
+    }
+    function closeLightbox() {
+        document.getElementById('lightbox').classList.add('close');
+        setTimeout(() => {
+            document.getElementById('lightbox').style.display = 'none';
+    }, 300);
+    }
+</script>
+</body>
+</html>
+

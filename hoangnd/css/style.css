@@ -1,0 +1,126 @@
+body {
+    font-family: Time New Roman, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f3f3f3;
+}
+header {
+    background-color: #fff;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+}
+header img {
+    margin: 0 auto;
+}
+main {
+    padding: 20px;
+}
+section {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+.main-content {
+    margin: 0 auto;
+    max-width: 1200px;
+    padding: 0 15px;
+}
+.main-col {
+    padding: 10px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+}
+.main-col img {
+    max-width: 100%;
+    display: block;
+}
+.main-col h2 {
+    font-size: 20px;
+    font-weight: 700;
+    margin: 10px 0 15px;
+}
+form {
+    margin: 20px auto;
+    padding: 30px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+}
+form label {
+    display: block;
+    margin-bottom: 8px;
+}
+form input,
+form select,
+form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    background-color: #fff;
+}
+form button {
+    background-color: #1b243a;
+    color: #fff;
+    padding: 10px;
+    border: none;
+    border-radius: 0;
+    cursor: pointer;
+}
+form button:hover {
+    background-color: #0862ff;
+}
+#comments {
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    background-color: #fff;
+    padding: 20px;
+}
+#comments:empty {
+    display: none;
+}
+footer {
+    background-color: #1b243a;
+    color: #fff;
+    padding: 10px;
+    text-align: center;
+}
+.lightbox {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    animation: fadeIn 0.3s ease-out forwards;
+}
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+.lightbox img {
+    max-width: 90%;
+    max-height: 90%;
+    border-radius: 0;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+}
+.lightbox.close {
+    animation: fadeOut 0.3s ease-in forwards;
+}
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
